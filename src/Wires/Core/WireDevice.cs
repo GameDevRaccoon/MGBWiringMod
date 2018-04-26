@@ -91,11 +91,7 @@ namespace DuckGame.MGBWiringMod.src
             //TODO: Handle this.
         }
 
-        DeviceColour Colour
-        {
-            get { return myColour; }
-            set { myColour = value; }
-        }
+        DeviceColour Colour{get;set;}
         public override void EditorPropertyChanged(object property)
         {
         }

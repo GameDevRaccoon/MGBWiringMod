@@ -9,7 +9,7 @@ namespace DuckGame.MGBWiringMod.src
     [EditorGroup("MGB|Online Wiring|Functional")]
     class FireVent : WireDevice, IWireDevice
     {
-        private bool active = false;
+        private bool operating = false;
         public FireVent(int xpos, int ypos) 
             : base(xpos, ypos)
         {
@@ -18,7 +18,7 @@ namespace DuckGame.MGBWiringMod.src
 
         public void Pulse()
         {
-            active = true;
+            operating = true;
             SFX.Play("click", 1f, 0.0f, 0.0f, false);
         }
 
@@ -31,7 +31,7 @@ namespace DuckGame.MGBWiringMod.src
         public override void Update()
         {
             UpdateConnectionState();
-            if (active)
+            if (operating)
             {
                 this._solid = false;
                 foreach (PhysicsObject physicsObject in Level.CheckRectAll<PhysicsObject>(this.topLeft + new Vec2(0.0f, -8f), this.bottomRight))
