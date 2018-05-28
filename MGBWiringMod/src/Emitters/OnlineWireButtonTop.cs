@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using DuckGame.MGBWiringMod.src.Core;
 namespace DuckGame.MGBWiringMod.src
 {
     class OnlineWireButtonTop : MaterialThing
@@ -43,13 +44,13 @@ namespace DuckGame.MGBWiringMod.src
         public override void OnSoftImpact(MaterialThing with, ImpactedFrom from)
         {
             if (this._orientation == 0 && (double)with.vSpeed > -0.100000001490116)
-                this._button.Emit();
+                this._button.EmitSignal();
             else if (this._orientation == 1 && (double)with.hSpeed < 0.100000001490116)
-                this._button.Emit();
+                this._button.EmitSignal();
             else if (this._orientation == 2 && (double)with.vSpeed < 0.100000001490116)
-                this._button.Emit();
+                this._button.EmitSignal();
             else if (this._orientation == 3 && (double)with.hSpeed > -0.100000001490116)
-                this._button.Emit();
+                this._button.EmitSignal();
             base.OnSoftImpact(with, from);
         }
     }

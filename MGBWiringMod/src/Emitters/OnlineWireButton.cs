@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using DuckGame.MGBWiringMod.src.Core;
 namespace DuckGame.MGBWiringMod.src
 {
     [EditorGroup("MGB|Online Wiring|Emitters")]
-    class OnlineWireButton : WireDevice, IWireDevice
+    class OnlineWireButton : Block, IEmitter
     {
         EditorProperty<bool> upConnection = new EditorProperty<bool>(false, (Thing)null, 0f, 1f, 1f, null, false, false);
         EditorProperty<bool> downConnection = new EditorProperty<bool>(false, (Thing)null, 0f, 1f, 1f, null, false, false);
@@ -19,22 +20,17 @@ namespace DuckGame.MGBWiringMod.src
         float pulseDelay = 5.0f;
         float currentDelay = 0.0f;
 
-        public OnlineWireButton(int xpos, int ypos)
+        public OnlineWireButton(float xpos, float ypos)
             : base(xpos, ypos)
         {
-            this.graphic = new SpriteMap(Mod.GetPath<MGBWiringMod>("sprites/wirebutton"), 16, 19, true);
+            this.graphic = new SpriteMap(Mod.GetPath<MGBWiringMod>("sprites/wirebutton"), 16, 16, true);
             this._editorName = "Online Wire Button";
-            this.center = new Vec2(8f, 11f);
+            this.center = new Vec2(8f, 8f);
             this.collisionSize = new Vec2(16f, 16f);
             this.collisionOffset = new Vec2(-8f, -8f);
             this.depth = (Depth)0.5f;
-            this.x = (float)xpos;
-            this.y = (float)ypos;
-            this.red = new EditorProperty<bool>(true, (Thing)this, 0.0f, 4f, 1f, null, false, false);
-            this.green = new EditorProperty<bool>(false, (Thing)this, 0.0f, 4f, 1f, null, false, false);
-            this.blue = new EditorProperty<bool>(false, (Thing)this, 0.0f, 4f, 1f, null, false, false);
-            this.yellow = new EditorProperty<bool>(false, (Thing)this, 0.0f, 4f, 1f, null, false, false);
-            this.myColourState = new DeviceColourState(true, false, false, false);
+            this.x = xpos;
+            this.y = ypos;
         }
 
         public override void Initialize()
@@ -58,18 +54,6 @@ namespace DuckGame.MGBWiringMod.src
         public override void EditorPropertyChanged(object property)
         {
             //TODO: Change to contextRadioButton
-
-            DeviceColourState currentState = new DeviceColourState(this.red.value, this.green.value, this.blue.value, this.yellow.value);
-            DeviceColourState newState;
-            newState.r = (currentState.r && !this.myColourState.r) ? true : false;
-            newState.g = (currentState.g && !this.myColourState.g) ? true : false;
-            newState.b = (currentState.b && !this.myColourState.b) ? true : false;
-            newState.y = (currentState.y && !this.myColourState.y) ? true : false;
-            this.myColourState = newState;
-            if (this.red.value != newState.r && (EditorProperty<bool>)property != this.red) this.red.value = newState.r;
-            if (this.blue.value != newState.b && (EditorProperty<bool>)property != this.blue) this.blue.value = newState.b;
-            if (this.green.value != newState.g && (EditorProperty<bool>)property != this.green) this.green.value = newState.g;
-            if (this.yellow.value != newState.y && (EditorProperty<bool>)property != this.yellow) this.yellow.value = newState.y;
         }
 
         public override void Terminate()
@@ -87,17 +71,17 @@ namespace DuckGame.MGBWiringMod.src
             hasPulsed = true;
         }
 
-        public override void Emit(List<WireDevice> travelled)
+        public void EmitSignal(IList<IConsumer> travelled)
         {
             if (hasPulsed)
                 return;
             Pulse();
-            base.Emit(travelled);
+            EmitSignal(travelled);
         }
 
         public override void Update()
         {
-            UpdateConnectionState();
+           // UpdateConnectionState();
             if (this.frame == 1 && Level.CheckRect<PhysicsObject>(this._top.topLeft, this._top.bottomRight, (Thing)null) == null)
             {
                 SFX.Play("click", 1f, 0.0f, 0.0f, false);
@@ -116,6 +100,16 @@ namespace DuckGame.MGBWiringMod.src
                 }
             }
             base.Update();
+        }
+
+        public void ConsumeSignal()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EmitSignal()
+        {
+            throw new NotImplementedException();
         }
     }
 }

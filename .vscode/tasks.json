@@ -14,7 +14,8 @@
             ],
             "group": "build",
             "presentation": {
-                "reveal": "silent"
+                "reveal": "silent",
+                "panel": "shared"
             },
             "problemMatcher": "$msCompile"
         },
@@ -29,7 +30,8 @@
             ],
             "group": "build",
             "presentation": {
-                "reveal": "silent"
+                "reveal": "silent",
+                "panel": "shared"
             },
             "problemMatcher": "$msCompile"
         },
@@ -40,7 +42,11 @@
             "args": [
                 "Remove-Item -ErrorAction SilentlyContinue -r -Force $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;",
                 "New-Item -Type directory $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;"
-            ]
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
         },
         {
             "label": "depoly-debug-local",
@@ -49,10 +55,14 @@
             "command": "Powershell",
             "args": [
                 "Copy-Item -r Content/ $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;",
-                "Copy-Item bin/Debug/MGBWiringMod.dll $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;",
+                "Copy-Item MGBWiringMod/bin/Debug/MGBWiringMod.dll $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;",
                 "Copy-Item mod.conf $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod"
             ],
-            "group": "build"
+            "group": "build",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
         },
         {
             "label": "depoly-release-local",
@@ -60,11 +70,15 @@
             "dependsOn" : ["build-release","clean-local",],
             "command":"Powershell",
             "args": [
-                "Copy-Item -r Content/ $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;",
-                "Copy-Item bin/Release/MGBWiringMod.dll $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;",
+                "Copy-Item -r MGBWiringMod/Content/ $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;",
+                "Copy-Item MGBWiringMod/bin/Release/MGBWiringMod.dll $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod;",
                 "Copy-Item mod.conf $HOME\\Documents\\DuckGame\\Mods\\MGBWiringMod"
             ],
-            "group": "build"
+            "group": "build",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
         }
 
     ]

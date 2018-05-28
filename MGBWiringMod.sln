@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MGBWiringMod", "MGBWiringMod.csproj", "{661B1664-90E8-4B5C-91D7-F8D06AF31704}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MGBWiringMod", "MGBWiringMod\MGBWiringMod.csproj", "{661B1664-90E8-4B5C-91D7-F8D06AF31704}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +11,8 @@ Global
 		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{661B1664-90E8-4B5C-91D7-F8D06AF31704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
